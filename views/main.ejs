@@ -1,55 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
-    <link rel='stylesheet' href="/css/home.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-</head>
-<body>
-    <div class="container">
-    <div id="watch-room" class="mt-5 card shadow rounded">
-        <ul class="nav nav-tabs">
-          <li class="active p-3">
-            <a data-toggle="tab" href="#create-watchroom">
-              Create Watchroom
-            </a>
-          </li>
-          <li class="p-3">
-            <a id="join-watchroom-tab" data-toggle="tab" href="#select-watchroom">
-              Join Watchroom
-            </a>
-          </li>
-        </ul>
-    
-        <div class="tab-content">
-          <div id="create-watchroom" class="tab-pane active">
-            <form>
-              <button id="create-watchroom-btn" type="button" class="btn btn-primary mb-2 mt-2 watchroom-btn">
-                Create
-              </button>
-            </form>
-            <div id="create-watchroom-alert-msg" role="alert"></div>
-          </div>
-          <div id="select-watchroom" class="tab-pane fade">
-            <div id="join-watchroom-alert-msg" role="alert"></div>
-            <div class="form-group mx-3 mb-2">
-              <label for="watchroom-name" class="label">Watchroom id</label>
-              <input type="text" class="form-control" id="watchroom-search-name" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="/css/home.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <script>
+            function create_watchroom() {
+                console.log("hello");
+                $.get("/api/create", (res) => {
+                    window.location.href = res.roomID;
+                });
+            }
+        </script>
+
+        <div class="container">
+            <div id="watch-room" class="mt-5 card shadow rounded">
+                <ul class="nav nav-tabs">
+                    <li class="active p-3">
+                        <a data-toggle="tab" href="#create-watchroom">
+                            Create Watchroom
+                        </a>
+                    </li>
+                    <li class="p-3">
+                        <a
+                            id="join-watchroom-tab"
+                            data-toggle="tab"
+                            href="#join-watchroom"
+                        >
+                            Join Watchroom
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="create-watchroom" class="tab-pane active">
+                        <form>
+                            <button
+                                id="create-watchroom-btn"
+                                type="button"
+                                class="btn btn-primary mb-2 mt-2 watchroom-btn"
+                                onclick="create_watchroom()"
+                            >
+                                Create
+                            </button>
+                        </form>
+                        <div id="create-watchroom-alert-msg" role="alert"></div>
+                    </div>
+                    <div id="join-watchroom" class="tab-pane fade">
+                        <div id="join-watchroom-alert-msg" role="alert"></div>
+                        <form>
+                            <div class="form-group mx-3 mb-2">
+                                <label for="watchroom-name" class="label"
+                                    >Watchroom id</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="watchroom-search-name"
+                                />
+                            </div>
+                            <button
+                                id="create-watchroom-btn"
+                                type="button"
+                                class="btn btn-primary mb-2 mt-2 watchroom-btn"
+                            >
+                                Join
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <button id="create-watchroom-btn" type="button" class="btn btn-primary mb-2 mt-2 watchroom-btn">
-                Join
-              </button>
-          </div>
         </div>
-      </div>
-    </div>
-    </div>
-</body>
+    </body>
 </html>
-
-
-
