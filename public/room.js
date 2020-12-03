@@ -1,5 +1,4 @@
-// setup socket connection
-// const socket = io.connect("http://localhost");
+// setup client side socket io
 const socket = io("/");
 socket.emit("join-room", ROOM_ID);
 

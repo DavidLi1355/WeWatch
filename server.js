@@ -10,19 +10,23 @@ const port = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+// main page view
 app.get("/", (req, res) => {
     res.render("main");
 });
 
+// api to create room
 app.get("/api/create", (req, res) => {
     console.log("hi");
     res.json({ roomID: `/${uuidV4()}` });
 });
 
+// room view
 app.get("/:roomID", (req, res) => {
     res.render("room", { roomID: req.params.roomID });
 });
 
+// socket io
 io.on("connection", (socket) => {
     socket.on("join-room", (roomID) => {
         console.log("client connected");
