@@ -14,6 +14,10 @@ socket.on("video-paused", () => {
     player.pauseVideo();
 });
 
+socket.on("video-changed", (data) => {
+    player.cueVideoById(data.videoID);
+});
+
 // setup YouTube player
 var tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";
@@ -25,7 +29,6 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player("youtubePlayer", {
         height: "720",
         width: "1280",
-        videoId: "m9gWy5cHQOE",
         events: {
             onReady: onPlayerReady,
             onStateChange: onPlayerStateChange,
@@ -53,12 +56,14 @@ function onPlayerStateChange(event) {
     }
 }
 
-function changeVideo(event) {
-    event.preventDefault();
+function changeVideo(videoID) {
     console.log("Change video");
-    videoID = "Hk0ABoBaN4c";
-    player.loadVideoById(videoID);
-    sendAction("change-video", videoID);
+    player.cueVideoById(videoID);
+    console.log(videoID);
+    sendAction("change-video", {
+        roomID: ROOM_ID,
+        videoID: videoID,
+    });
 }
 
 function sendAction(action, data) {

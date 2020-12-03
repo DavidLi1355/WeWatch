@@ -39,7 +39,11 @@ io.on("connection", (socket) => {
         socket.to(data.roomID).broadcast.emit("video-paused");
     });
 
-    socket.on("change-video", (data) => {});
+    socket.on("change-video", (data) => {
+        socket
+            .to(data.roomID)
+            .broadcast.emit("video-changed", { videoID: data.videoID });
+    });
 });
 
 server.listen(port, () => {
