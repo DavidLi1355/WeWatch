@@ -13,19 +13,52 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             const ROOM_ID = "<%= roomID %>";
+            document.getElementById("roomID").innerHTML = ROOM_ID;
         </script>
+        <script>
+            const leave_watchroom = () => {
+                window.location.href = "/";
+            };
+        </script>
+        <style>
+            input {
+                width: 400px;
+            }
+        </style>
     </head>
     <body>
-        <button onclick="changeVideo(event)">Exit</button>
-        <form>
-            <input />
-            <button onclick="changeVideo">Play</button>
-        </form>
+        <div class="container-fluid">
+            <div class="row justify-content-center m-3">
+                <button
+                    type="button"
+                    class="btn btn-lg btn-danger"
+                    onclick="leave_watchroom()"
+                >
+                    Exit
+                </button>
+            </div>
+            <div class="row justify-content-center m-3">
+                <div class="form-group mx-2 my-2">
+                    <input placeholder="Enter video url" />
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary mx-2 my-1"
+                    onclick="changeVideo()"
+                >
+                    Play
+                </button>
+            </div>
 
-        <div id="youtubePlayer"></div>
+            <div class="row justify-content-center m-3">
+                <div id="youtubePlayer"></div>
+            </div>
 
-        <p>Room ID:</p>
-
-        <script src="room.js"></script>
+            <div class="row justify-content-center m-3">
+                <p>Room ID:</p>
+                <p id="roomID"></p>
+            </div>
+        </div>
+        <script src="room.js" defer></script>
     </body>
 </html>

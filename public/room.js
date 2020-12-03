@@ -25,21 +25,27 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player("youtubePlayer", {
         height: "720",
         width: "1280",
-        videoId: "M7lc1UVf-VE",
+        videoId: "m9gWy5cHQOE",
         events: {
+            onReady: onPlayerReady,
             onStateChange: onPlayerStateChange,
         },
     });
 }
 
+function onPlayerReady(event) {
+    console.log("Player ready");
+}
+
 function onPlayerStateChange(event) {
-    if (player.getPlayerState() === 1) {
+    console.log(event.data);
+    if (event.data === 1) {
         console.log("Started");
         sendAction("play-video", {
             roomID: ROOM_ID,
             time: player.getCurrentTime(),
         });
-    } else if (player.getPlayerState() === 2) {
+    } else if (event.data === 2) {
         console.log("Paused");
         sendAction("pause-video", {
             roomID: ROOM_ID,

@@ -10,6 +10,11 @@
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            .container {
+                width: 720px;
+            }
+        </style>
     </head>
     <body>
         <script>
@@ -24,56 +29,19 @@
         </script>
 
         <div class="container">
-            <div id="watch-room" class="mt-5 card shadow rounded">
-                <ul class="nav nav-tabs">
-                    <li class="active p-3">
-                        <a data-toggle="tab" href="#create-watchroom">
-                            Create Watchroom
-                        </a>
-                    </li>
-                    <li class="p-3">
-                        <a
-                            id="join-watchroom-tab"
-                            data-toggle="tab"
-                            href="#join-watchroom"
-                        >
-                            Join Watchroom
-                        </a>
-                    </li>
-                </ul>
+            <div class="mt-5 card shadow rounded">
+                <div class="nav nav-tabs justify-content-center">
+                    <h2 class="p-3">Create Watchroom</h2>
+                </div>
 
-                <div class="tab-content">
-                    <div id="create-watchroom" class="tab-pane active">
-                        <button
-                            id="create-watchroom-btn"
-                            type="button"
-                            class="btn btn-primary mb-2 mt-2 watchroom-btn"
-                            onclick="create_watchroom()"
-                        >
-                            Create
-                        </button>
-                    </div>
-                    <div id="join-watchroom" class="tab-pane fade">
-                        <form>
-                            <div class="form-group mx-3 mb-2">
-                                <label for="watchroom-name" class="label"
-                                    >Watchroom id</label
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="watchroom-search-name"
-                                />
-                            </div>
-                            <button
-                                id="create-watchroom-btn"
-                                type="button"
-                                class="btn btn-primary mb-2 mt-2 watchroom-btn"
-                            >
-                                Join
-                            </button>
-                        </form>
-                    </div>
+                <div class="row card-body justify-content-center">
+                    <button
+                        type="button"
+                        class="btn-lg btn-primary my-2"
+                        onclick="create_watchroom()"
+                    >
+                        Create
+                    </button>
                 </div>
             </div>
         </div>
