@@ -8,18 +8,19 @@
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         />
-        <link rel="stylesheet" href="/css/home.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
         <script>
-            function create_watchroom() {
+            const create_watchroom = () => {
                 console.log("hello");
                 $.get("/api/create", (res) => {
                     window.location.href = res.roomID;
                 });
-            }
+            };
+
+            const join_watchroom = () => {};
         </script>
 
         <div class="container">
@@ -43,20 +44,16 @@
 
                 <div class="tab-content">
                     <div id="create-watchroom" class="tab-pane active">
-                        <form>
-                            <button
-                                id="create-watchroom-btn"
-                                type="button"
-                                class="btn btn-primary mb-2 mt-2 watchroom-btn"
-                                onclick="create_watchroom()"
-                            >
-                                Create
-                            </button>
-                        </form>
-                        <div id="create-watchroom-alert-msg" role="alert"></div>
+                        <button
+                            id="create-watchroom-btn"
+                            type="button"
+                            class="btn btn-primary mb-2 mt-2 watchroom-btn"
+                            onclick="create_watchroom()"
+                        >
+                            Create
+                        </button>
                     </div>
                     <div id="join-watchroom" class="tab-pane fade">
-                        <div id="join-watchroom-alert-msg" role="alert"></div>
                         <form>
                             <div class="form-group mx-3 mb-2">
                                 <label for="watchroom-name" class="label"

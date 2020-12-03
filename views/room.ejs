@@ -8,11 +8,24 @@
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         />
-        <link rel="stylesheet" href="/css/home.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const ROOM_ID = "<%= roomID %>";
+        </script>
     </head>
     <body>
-        <div class="container">Hi</div>
+        <button onclick="changeVideo(event)">Exit</button>
+        <form>
+            <input />
+            <button onclick="changeVideo">Play</button>
+        </form>
+
+        <div id="youtubePlayer"></div>
+
+        <p>Room ID:</p>
+
+        <script src="room.js"></script>
     </body>
 </html>

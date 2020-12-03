@@ -20,15 +20,26 @@ app.get("/api/create", (req, res) => {
 });
 
 app.get("/:roomID", (req, res) => {
-    res.render("room");
+    res.render("room", { roomID: req.params.roomID });
 });
 
 io.on("connection", (socket) => {
-    socket.on("join-room", (roomID, userID) => {
+    socket.on("join-room", (roomID) => {
+        console.log("client connected");
         socket.join(roomID);
-        socket.to(roomID).broadcast.emit();
-        console.log(roomID, userID);
     });
+
+    socket.on("play-video", (data) => {
+        socket
+            .to(data.roomID)
+            .broadcast.emit("video-played", { time: data.time });
+    });
+
+    socket.on("pause-video", (data) => {
+        socket.to(data.roomID).broadcast.emit("video-paused");
+    });
+
+    socket.on("change-video", (data) => {});
 });
 
 server.listen(port, () => {
