@@ -40,15 +40,12 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(event) {
-    console.log(event.data);
     if (event.data === 1) {
-        console.log("Started");
         sendAction("play-video", {
             roomID: ROOM_ID,
             time: player.getCurrentTime(),
         });
     } else if (event.data === 2) {
-        console.log("Paused");
         sendAction("pause-video", {
             roomID: ROOM_ID,
         });
