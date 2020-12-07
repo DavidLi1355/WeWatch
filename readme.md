@@ -1,0 +1,1 @@
+Make sure to have node and npm installed. Clone the repo from the github link, then run “npm install” after installing all dependencies run “npm run devstart”. Then the website should be hosted on http://localhost:3000/.
