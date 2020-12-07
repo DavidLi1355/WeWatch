@@ -1,4 +1,5 @@
 const express = require("express");
+const { stat } = require("fs");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
@@ -16,7 +17,6 @@ app.get("/", (req, res) => {
 
 // api to create room
 app.get("/api/create", (req, res) => {
-    console.log("hi");
     res.json({ roomID: `/${uuidV4()}` });
 });
 
@@ -27,25 +27,42 @@ app.get("/:roomID", (req, res) => {
 
 // socket io
 io.on("connection", (socket) => {
-    socket.on("join-room", (roomID) => {
+    socket.on("join-room", async (roomID) => {
+        await socket.join(roomID);
         console.log("client connected");
-        socket.join(roomID);
+        console.log(io.sockets.adapter.rooms.get(roomID));
+        var users = io.sockets.adapter.rooms.get(roomID);
+        if (typeof users.size > 1) {
+            var firstSocketID = users.values().next().value;
+            console.log("first socket id: " + firstSocketID);
+            console.log("current socket id: " + socket.id);
+            socket
+                .to(firstSocketID)
+                .emit("get-status", { socketID: socket.id });
+        }
+    });
+
+    socket.on("send-current-status", (data) => {
+        console.log("send-current-status");
+        console.log(data);
+        socket.to(data.socketID).emit("set-status", data);
     });
 
     socket.on("play-video", (data) => {
-        socket
-            .to(data.roomID)
-            .broadcast.emit("video-played", { time: data.time });
+        console.log("server play-video");
+        console.log(data);
+        console.log(io.sockets.adapter.rooms);
+        socket.to(data.roomID).emit("video-played", { time: data.time });
     });
 
     socket.on("pause-video", (data) => {
-        socket.to(data.roomID).broadcast.emit("video-paused");
+        socket.to(data.roomID).emit("video-paused");
     });
 
     socket.on("change-video", (data) => {
-        socket
-            .to(data.roomID)
-            .broadcast.emit("video-changed", { videoID: data.videoID });
+        console.log("change-video: ");
+        console.log(data);
+        socket.to(data.roomID).emit("video-changed", { videoID: data.videoID });
     });
 });
 
